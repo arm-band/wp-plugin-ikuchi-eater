@@ -1,0 +1,6 @@
+@charset "utf-8";
+
+/* 設定画面: li の左側にインデントを付ける */
+#ikuchieater_taxonomies_checkboxes-table .children {
+    margin-left: 2rem;
+}
