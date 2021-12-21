@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Ikuchi Eater
-Description: 通常の投稿のみ、スラッグ決定時に機械的にスラッグを上書きする。スラッグのフォーマットは <post_type>-<post_id>-yyyy-mm-dd
-Version:     0.0.1
+Description: 通常の投稿のみ、スラッグ決定時に機械的にスラッグを上書きする。スラッグのフォーマットは {post_type}-{post_id}-yyyy-mm-dd
+Version:     0.0.2
 Author:      アルム＝バンド
 */
 
@@ -49,7 +49,10 @@ class IkuchiEater
         $post_type
     )
     {
-        if ( $post_type === 'post' ) {
+        if (
+            $post_type === 'post'
+            && !preg_match( '/^[\w\-_]+\-[\d]+\-(20|19)\d{2}\-\d{2}\-\d{2}$/i', $slug )
+        ) {
             $slug = utf8_uri_encode( $post_type ) . '-' . $post_ID . '-' . date('Y-m-d');
         }
         return $slug;
